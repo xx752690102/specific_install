@@ -61,6 +61,14 @@ Or install in the users personal gem directory
   $ gem specific_install https://github.com/orlandohill/waxeye -u
 `
 
+Or install in the install directory
+
+`
+  $ gem specific_install https://github.com/cxr0715/cocoapods-TSPodfileTimeWatch.git -i /Users/bkdevops/TSPodfileTimeWatch_dir
+`
+
+PS: you should **export RUBYLIB=/Users/bkdevops/TSPodfileTimeWatch_dir/cocoapods-TSPodfileTimeWatch-0.0.6/lib:other_plug_path** to use -i install plug
+
 The following URI types are accepted:
 
 - http(s)://github.com/rdp/specific_install.git
