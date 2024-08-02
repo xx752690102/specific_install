@@ -35,6 +35,10 @@ class Gem::Commands::SpecificInstallCommand < Gem::Command
     add_option('-u', '--user-install', arguments) do |userinstall, options|
       options[:userinstall] = userinstall
     end
+
+    add_option('-i', '--install-dir INSTALL_DIR', arguments) do |installdir, options|
+      options[:installdir] = installdir
+    end
   end
 
   def arguments
@@ -52,6 +56,7 @@ class Gem::Commands::SpecificInstallCommand < Gem::Command
     @branch ||= set_branch if set_branch
     @ref ||= set_ref
     @tag ||= set_tag
+    @installdir ||= set_installdir
     if @loc.nil?
       raise ArgumentError, "No location received. Use like `gem specific_install -l http://example.com/rdp/specific_install`"
     end
@@ -194,6 +199,10 @@ class Gem::Commands::SpecificInstallCommand < Gem::Command
     options[:tag]
   end
 
+  def set_installdir
+    options[:installdir]
+  end
+
   def success_message
     output.puts 'Successfully installed'
   end
@@ -203,6 +212,7 @@ class Gem::Commands::SpecificInstallCommand < Gem::Command
     if gem
       install_options = {}
       install_options[:user_install] = options[:userinstall].nil? ? nil : true
+      install_options[:install_dir] = options[:installdir] if options[:installdir]
       inst = Gem::DependencyInstaller.new install_options
       inst.install gem
     else
