@@ -1,3 +1,3 @@
-module SpecificInstall
-  VERSION = "0.3.8"
+module SpecificInstallPixie
+  VERSION = "0.3.9"
 end

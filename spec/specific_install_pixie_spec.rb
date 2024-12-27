@@ -4,7 +4,7 @@ require 'stringio'
 require 'open3'
 require 'tmpdir'
 
-describe Gem::Commands::SpecificInstallCommand do
+describe Gem::Commands::SpecificInstallPixieCommand do
   before do
     module Kernel
       alias_method :real_system, :system
@@ -25,7 +25,7 @@ describe Gem::Commands::SpecificInstallCommand do
     end
   end
 
-  subject { Gem::Commands::SpecificInstallCommand.new(StringIO.new) }
+  subject { Gem::Commands::SpecificInstallPixieCommand.new(StringIO.new) }
   describe "#gem_name" do
     it "sets gem_name from location" do
       subject.instance_variable_set(:@loc, "stuff/foo/bar")
@@ -35,7 +35,7 @@ describe Gem::Commands::SpecificInstallCommand do
 
   context "disable #install_from_git" do
     before do
-      class Gem::Commands::SpecificInstallCommand
+      class Gem::Commands::SpecificInstallPixieCommand
         def install_from_git(dir)
           dir
         end
@@ -176,7 +176,7 @@ describe "Integration Tests" do
 
   $STDOUT = StringIO.new
   let(:output) { StringIO.new }
-  subject { Gem::Commands::SpecificInstallCommand.new(output) }
+  subject { Gem::Commands::SpecificInstallPixieCommand.new(output) }
   before(:all) do
     # ENV.store( "SPECIFIC_INSTALL_SPEC", '2&> /dev/null' )
   end

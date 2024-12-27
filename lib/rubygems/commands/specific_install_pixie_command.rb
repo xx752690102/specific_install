@@ -1,7 +1,7 @@
 require 'rubygems/command_manager'
 require 'rubygems/dependency_installer'
 
-class Gem::Commands::SpecificInstallCommand < Gem::Command
+class Gem::Commands::SpecificInstallPixieCommand < Gem::Command
   attr_accessor :output
 
   def description
@@ -213,6 +213,7 @@ class Gem::Commands::SpecificInstallCommand < Gem::Command
       install_options = {}
       install_options[:user_install] = options[:userinstall].nil? ? nil : true
       install_options[:install_dir] = options[:installdir] if options[:installdir]
+      install_options[:force] = true
       inst = Gem::DependencyInstaller.new install_options
       inst.install gem
     else
@@ -274,8 +275,8 @@ class Gem::Commands::SpecificInstallCommand < Gem::Command
   end
 end
 
-class Gem::Commands::GitInstallCommand < Gem::Commands::SpecificInstallCommand
+class Gem::Commands::GitInstallPixieCommand < Gem::Commands::SpecificInstallPixieCommand
 end
 
-Gem::CommandManager.instance.register_command :specific_install
-Gem::CommandManager.instance.register_command :git_install
+Gem::CommandManager.instance.register_command :specific_install_pixie
+Gem::CommandManager.instance.register_command :git_install_pixie
